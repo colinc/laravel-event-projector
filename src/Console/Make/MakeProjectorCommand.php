@@ -17,11 +17,11 @@ class MakeProjectorCommand extends GeneratorCommand
     {
         parent::handle();
 
-        if (! $this->option('sync')) {
+        if (! $this->option('queued')) {
             return;
         }
 
-        $this->rewriteToSyncProjector();
+        $this->rewriteToQueuedProjector();
     }
 
     protected function getStub()
@@ -34,7 +34,7 @@ class MakeProjectorCommand extends GeneratorCommand
         return $rootNamespace.'\Projectors';
     }
 
-    protected function rewriteToSyncProjector()
+    protected function rewriteToQueuedProjector()
     {
         $name = $this->qualifyClass($this->getNameInput());
 
@@ -51,7 +51,7 @@ class MakeProjectorCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['queued', 'q', InputOption::VALUE_NONE, 'Create a QueuedProjector'],
+            ['queued', 'Q', InputOption::VALUE_NONE, 'Create a QueuedProjector'],
         ];
     }
 }
